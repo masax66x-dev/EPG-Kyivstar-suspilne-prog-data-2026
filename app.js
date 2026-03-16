@@ -16,6 +16,7 @@ const channelSelect = document.getElementById("channel-select");
 const channelPickerWrapper = document.getElementById("channel-picker-wrapper");
 const langToggleBtn = document.getElementById("lang-toggle");
 const langText = document.getElementById("lang-text");
+const downloadBtn = document.getElementById("download-csv");
 const tabBtns = document.querySelectorAll(".tab-btn");
 const loadingEl = document.getElementById("loading");
 
@@ -260,6 +261,15 @@ channelSelect.addEventListener("change", (e) => {
     renderUI();
     // Use setTimeout to allow DOM to layout before scrolling
     setTimeout(scrollToClosest, 100);
+});
+
+downloadBtn.addEventListener("click", () => {
+    const link = document.createElement("a");
+    link.href = "multichannel_max_epg.csv";
+    link.download = "multichannel_max_epg.csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 });
 
 tabBtns.forEach(btn => {
