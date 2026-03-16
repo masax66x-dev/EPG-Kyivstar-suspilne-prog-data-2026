@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suspilne EPG Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Include PapaParse for performant CSV parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Main Navigation Bar -->
+        <header class="glass-header">
+            <div class="header-content">
+                <h1 id="app-title">Suspilne EPG</h1>
+                
+                <button id="lang-toggle" class="glass-button">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                    <span id="lang-text">UA</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Dynamic Controls -->
+        <div class="controls-container">
+            <!-- Channel Picker (only visible in All Channels mode) -->
+            <div id="channel-picker-wrapper" class="glass-panel">
+                <label for="channel-select" id="channel-label">Select Channel</label>
+                <select id="channel-select"></select>
+            </div>
+            
+            <!-- Loading indicator -->
+            <div id="loading" class="loading-state">
+                <div class="spinner"></div>
+                <p id="loading-text">Loading ~11,000 programs...</p>
+            </div>
+        </div>
+
+        <!-- Scrollable Content View -->
+        <main id="content-area" class="content-scroll"></main>
+
+        <!-- Bottom Tab Bar -->
+        <nav class="glass-tab-bar">
+            <button class="tab-btn active" data-tab="all">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                    <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+                    <polyline points="17 2 12 7 7 2"></polyline>
+                </svg>
+                <span id="tab-all-text">All Channels</span>
+            </button>
+            <button class="tab-btn" data-tab="local">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span id="tab-local-text">Local Regions</span>
+            </button>
+        </nav>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

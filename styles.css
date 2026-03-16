@@ -1,0 +1,288 @@
+/* Global Reset & Box Sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    color: #e2e8f0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    overflow: hidden; /* Stop body scrolling, let content area scroll */
+}
+
+.app-container {
+    width: 100%;
+    max-width: 600px; /* Mobile app feel on desktop */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    background: rgba(15, 23, 42, 0.4);
+}
+
+/* Glassmorphism Header */
+.glass-header {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px 20px;
+    z-index: 10;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#app-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #60a5fa, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Glass Button (Lang Toggle) */
+.glass-button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.glass-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+/* Controls */
+.controls-container {
+    padding: 12px 20px 0;
+    z-index: 5;
+}
+
+.glass-panel {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(8px);
+}
+
+#channel-label {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+select {
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    max-width: 60%;
+    cursor: pointer;
+}
+
+/* Loading State */
+.loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-left-color: #60a5fa;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+#loading-text {
+    color: #94a3b8;
+    font-size: 0.95rem;
+}
+
+/* Main Content Area */
+.content-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 20px 80px; /* Bottom padding for tab bar */
+    scroll-behavior: smooth;
+}
+
+.content-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.content-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+/* Sections & Dates */
+.date-header {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f59e0b;
+    margin: 24px 0 12px;
+    position: sticky;
+    top: 0;
+    background: rgba(15, 23, 42, 0.9);
+    padding: 8px 0;
+    z-index: 2;
+    backdrop-filter: blur(4px);
+}
+
+/* Program Rows */
+.program-row {
+    display: flex;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.2s ease;
+}
+
+.program-row:hover {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+}
+
+.time-col {
+    width: 55px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.time-start {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #f8fafc;
+}
+
+.time-end {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+.separator {
+    width: 3px;
+    background: #f59e0b;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.details-col {
+    flex: 1;
+}
+
+.channel-badge {
+    display: inline-block;
+    background: #f59e0b;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+}
+
+.prog-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.duration-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    color: #60a5fa;
+    background: rgba(96, 165, 250, 0.15);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.prog-desc {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    line-height: 1.4;
+}
+
+/* Tab Bar */
+.glass-tab-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(30, 41, 59, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0 24px;
+    z-index: 10;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    color: #64748b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 45%;
+}
+
+.tab-btn span {
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.tab-btn.active {
+    color: #60a5fa;
+}
+
+.tab-btn.active svg {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 2px 4px rgba(96, 165, 250, 0.4));
+}
